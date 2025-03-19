@@ -1,0 +1,113 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+    background-color: #f4f4f4;
+    /* background: url("{{ url_for('static', filename='SVGBG_Image.svg') }}") no-repeat center center fixed; */
+}
+
+/* body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+    background: url("{{ url_for('static', filename='2.jpg') }}") no-repeat center center fixed;
+    background-size: cover;
+} */
+
+
+.container {
+    width: 650px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.translate-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+select {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+    font-size: 16px;
+}
+
+textarea {
+    width: 90%;
+    height: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    resize: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: darkblue;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    margin: 0;
+    line-height: 1.2;
+    font-size: 14px;
+}
+
+footer h5 {
+    margin: 2px 0;
+    font-weight: normal;
+}
+
+
+
+.icon-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.icon-container i {
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.icon-container i:hover {
+    color: #007bff;
+}

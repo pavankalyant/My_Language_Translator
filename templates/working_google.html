@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Text and Audio Translator</title>
+</head>
+<body>
+    <div class="container">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="logo" width="100px"
+            style="margin-right: 100%; margin-bottom: -10px;">
+        <h2>My Language Translator</h2>
+        <form id="translateForm">
+            <div class="translate-box">
+                <div class="column">
+                    <label for="dropdown1">Source Language</label>
+                    <select name="dropdown1" id="dropdown1">
+                        <optgroup label="Languages">
+                            {% for language in languages %}
+                            <option value="{{ language }}">{{ language }}</option>
+                            {% endfor %}
+                        </optgroup>
+                    </select>
+                    <textarea name="text1" id="text1" placeholder="Enter text..."></textarea>
+                    <div class="icon-container">
+                        <i class="fas fa-copy" onclick="copyText('text1')" title="Copy"></i>
+                        <i class="fas fa-volume-up" onclick="speakText('text1')" title="Speak"></i>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <label for="dropdown2">Target Language</label>
+                    <select name="dropdown2" id="dropdown2">
+                        <optgroup label="Languages">
+                            {% for language in languages %}
+                            <option value="{{ language }}">{{ language }}</option>
+                            {% endfor %}
+                        </optgroup>
+                    </select>
+                    <textarea name="text2" id="text2" placeholder="Translation output..." readonly></textarea>
+                    <div class="icon-container">
+                        <i class="fas fa-copy" onclick="copyText('text2')" title="Copy"></i>
+                        <i class="fas fa-volume-up" onclick="speakText('text2')" title="Speak"></i>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <footer>
+        <h5> <span>Made by:-</span>T Pavan Kalyan</h5>
+        <h5><span>Role:-</span>Sr. Full Stack Developer</h5>
+        <h5><span>Contact No.:-</span> +91 7008234802</h5>
+        <h5><span>Working at:-</span> Pinaca Technologies Pvt Ltd</h5>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <script>
+        function copyText(textareaId) {
+            let textarea = document.getElementById(textareaId);
+            navigator.clipboard.writeText(textarea.value);
+            alert("Copied: " + textarea.value);
+        }
+
+        function speakText(textareaId) {
+            let text = document.getElementById(textareaId).value;
+            let speech = new SpeechSynthesisUtterance(text);
+            speech.lang = "en-US"; // Adjust based on language
+            window.speechSynthesis.speak(speech);
+        }
+    </script>
+
+    <script>
+        document.getElementById("text1").addEventListener("input", function () {
+            let sourceLang = document.getElementById("dropdown1").value;
+            let targetLang = document.getElementById("dropdown2").value;
+            let text = this.value;
+
+            if (text.trim() === "") {
+                document.getElementById("text2").value = "";
+                return;
+            }
+
+            fetch("/translate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    source: sourceLang,
+                    target: targetLang,
+                    text: text
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("text2").value = data.translation;
+                })
+                .catch(error => console.error("Error:", error));
+        });
+    </script>
+
+</body>
+
+</html>
