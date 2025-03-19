@@ -38,4 +38,4 @@ To get this project up and running on your local machine, follow these steps:
 
 1. **Clone this repository** to your local machine using the following command:
    ```bash
-   git clone https://github.com/your-username/my-language-translator.git
+   [git clone https://github.com/your-username/my-language-translator.git](https://github.com/pavankalyant/My_Language_Translator.git)
